@@ -53,6 +53,25 @@ This advanced notebook compares different forecasting approaches:
 - **Visualization**: Side-by-side comparison of actual vs predicted values
 - **Future Forecasting**: Extended predictions through 2020
 
+### 4. Deep Learning for Time Series (`PJME_hourly_deep_learning.ipynb`)
+
+This advanced notebook explores Sequential and Deep Learning architectures for short-term energy consumption forecasting:
+
+* **Data Preprocessing & Normalization**:
+  * Chronological sorting and linear interpolation for missing values.
+  * Target scaling using **`MinMaxScaler`** to fit values within the $[0, 1]$ range (`Scaled_MW`).
+* **Sliding Window Structuring**:
+  * **24-Hour Input Window**: Formatting data into 3D tensors `(samples, 24, 1)` to predict energy demand at time $t+1$ using the past 24 hours.
+  * Strictly chronological dataset split: **Train (70%)**, **Validation (15%)**, and **Test (15%)**.
+* **Deep Learning & ML Architectures Evaluated**:
+  * **Simple RNN**: 1 SimpleRNN layer (20 units) + Dropout (0.2) + Dense layer.
+  * **LSTM**: 1 LSTM layer (50 units) + Dropout (0.2) + Dense layer with `EarlyStopping`.
+  * **GRU**: 1 GRU layer (50 units) + Dropout (0.2) + Dense layer with `EarlyStopping`.
+  * **XGBoost (2D Baseline)**: Flattened 24-lag feature vector approach for comparative benchmark.
+* **Model Evaluation & Comparison**:
+  * Evaluation on unscaled test metrics (**RMSE** and **MAE** in MW) alongside training time performance.
+  * **Key Finding**: Tree-based XGBoost outperforms standard RNN architectures in both predictive accuracy and computation speed for single-step forecasting.
+
 **Key Learning**: Specialized time series tools vs traditional ML, and the importance of domain knowledge (holidays) in forecasting.
 
 ## Requirements
@@ -67,6 +86,10 @@ scikit-learn
 
 # Machine Learning
 xgboost
+
+# Deep Learning
+tensorflow
+keras
 
 # Time Series Forecasting
 prophet
@@ -118,6 +141,7 @@ pip install pandas numpy matplotlib seaborn scikit-learn xgboost prophet plotly 
 ├── PJMEmw_manipulation.ipynb          # Basic forecasting notebook
 ├── PJME_hourly_week2.ipynb           # Advanced XGBoost with cross-validation
 ├── PJME_hourly_week3.ipynb           # Prophet vs XGBoost comparison
+├── PJME_deep_learning.ipynb          # XGBoost vs Deep learning mmodels (RNN, LSTM, GRU)
 ├── PJME_hourly.csv                # Dataset (not included)
 └── README.md                      # This file
 ```
