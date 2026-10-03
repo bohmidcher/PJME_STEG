@@ -102,7 +102,7 @@ holidays
 ## Installation
 
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn xgboost prophet plotly holidays
+pip install pandas numpy matplotlib seaborn scikit-learn xgboost prophet plotly holidays tensorflow
 ```
 
 ## Usage
